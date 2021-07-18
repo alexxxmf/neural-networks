@@ -38,14 +38,25 @@ class Activation_ReLU():
 
 
 class Loss():
-  def __init__():
-    pass
-  def forward():
-    pass
+
+  def calculate(self, output, y):
+    sample_losses = self.forward(output, y)
+    return np.mean(sample_losses)
 
 
-class Loss_CrossEntropy():
-  def __init__():
-    pass
-  def forward():
-    pass
+class Loss_CategoricalCrossEntropy(Loss):
+
+  def forward(self, y_pred, y_true):
+    samples = len(y_pred)
+    # Some notes regarding clipping values
+    # https://stackoverflow.com/questions/65131391/what-exactly-is-kerass-categoricalcrossentropy-doing
+    # essentially we want to prevent a Runtime Issue when doing a np.log on 0
+    y_pred_clipped = np.clip(y_pred, 1e-7, 1-1e-7)
+    
+    if len(y_true.shape) == 1:
+      correct_confidences = y_pred_clipped[range(samples), y_true]
+
+    elif len(y_true.shape) == 2:
+      correct_confidences = np.sum(y_pred_clipped*y_true, axis=1)
+
+    return -np.log(correct_confidences)
