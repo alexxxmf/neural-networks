@@ -21,7 +21,7 @@ class DenseLayer():
     # given dvalues(gradient) has the same dimension as output, dvalues is [4 x 5]
     # if we want to get dweights (having same dim as weights, 3 x 5 ), we need to multiply
     # inputs Transpose by dvalues df/di = w | df/dw = i
-    self.dinputs = np.dot(self.weights.T, dvalues)
+    self.dinputs = np.dot(dvalues, self.weights.T)
     self.dweights = np.dot(self.dinputs.T, dvalues)
     self.dbiases = np.sum(dvalues, axis=0, keepdims=True)
 
@@ -39,9 +39,11 @@ class Activation_Softmax():
     self.dinputs = np.empty_like(dvalues)
 
     for index, (single_output, single_dvalues) in enumerate(zip(self.output, dvalues)):
-      single_output = single_output.reshape(-1, 1)
-      jacobian_matrix = np.diagflat(single_output) - np.dot(single_output, single_output.T)
-      self.dinputs[index] = np.dot(jacobian_matrix, single_dvalues)
+        single_output = single_output.reshape(-1, 1)
+
+        jacobian_matrix = np.diagflat(single_output) - np.dot(single_output, single_output.T)
+
+        self.dinputs[index] = np.dot(jacobian_matrix, single_dvalues)
 
 
 class Activation_ReLU():
@@ -51,8 +53,8 @@ class Activation_ReLU():
     self.output = np.maximum(0, inputs)
 
   def backward(self, dValues):
-    self.dInputs = dValues.copy()
-    self.dInputs[self.dInputs <= 0] = 0
+    self.dinputs = dValues.copy()
+    self.dinputs[self.dinputs <= 0] = 0
 
 
 class Loss():
