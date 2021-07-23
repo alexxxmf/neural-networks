@@ -29,6 +29,12 @@ For tricky derivatives/gradients like the softmax one, I rely on given python im
 
 - [What are good initial weights in a neural network?](https://stats.stackexchange.com/questions/47590/what-are-good-initial-weights-in-a-neural-network)
 
+- [Regarding the understanding of the mathematics behind AdaGrad and AdaDelta](https://datascience.stackexchange.com/questions/27676/understanding-the-mathematics-of-adagrad-and-adadelta)
+
+- [AdaDelta: An Adaptive Learning Rate Method](https://arxiv.org/abs/1212.5701)
+
+- [An overview of gradient descent optimization algorithms](https://ruder.io/optimizing-gradient-descent/)
+
 ### Random notes
 
 Softmax. How to prevent overflow when dealing with big numbershttps://nolanbconaway.github.io/blog/2017/softmax-numpy.html

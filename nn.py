@@ -167,6 +167,7 @@ class Optimizer_SGD :
   def post_update_params(self):
     self.iterations += 1
 
+
 class Optimizer_AdaGrad : 
 
   def __init__(self, learning_rate=1., decay=0., epsilon=1e-7): 
@@ -198,3 +199,13 @@ class Optimizer_AdaGrad :
   
   def post_update_params(self):
     self.iterations += 1
+
+
+class Optimizer_RMSprop:
+  def __init__(self, learning_rate=0.001, decay=0., epsilon=1e-7, rho=0.9):
+    self.learning_rate = learning_rate
+    self.current_learning_rate = learning_rate
+    self.decay = decay
+    self.iterations = 0
+    self.epsilon = epsilon
+    self.rho = rho
