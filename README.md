@@ -35,6 +35,18 @@ For tricky derivatives/gradients like the softmax one, I rely on given python im
 
 - [An overview of gradient descent optimization algorithms](https://ruder.io/optimizing-gradient-descent/)
 
+- [A question regarding the differences between decay and rho being the former a generic one applied to the LR and the latter a specific one that affects the squared gradients](https://stats.stackexchange.com/questions/351409/difference-between-rho-and-decay-arguments-in-keras-rmsprop)
+
+- [Why can GPU do matrix multiplication faster than CPU?](https://stackoverflow.com/questions/51344018/why-can-gpu-do-matrix-multiplication-faster-than-cpu)
+
+- [Understanding the Efficiency of GPU Algorithms for Matrix-Matrix Multiplication](https://graphics.stanford.edu/papers/gpumatrixmult/gpumatrixmult.pdf)
+
+- [Some interesting notes on optimization](http://www.cs.toronto.edu/~hinton/coursera/lecture6/lec6.pdf)
+
+- [Full collection of lectures on NN by UofT and prof. Hinton](https://www.cs.toronto.edu/~hinton/coursera_lectures.html)
+
+- [Great notes by J. Brownlee on RMSProp compared to SGD and AdaGrad](https://machinelearningmastery.com/gradient-descent-with-rmsprop-from-scratch/)
+
 ### Random notes
 
 Softmax. How to prevent overflow when dealing with big numbershttps://nolanbconaway.github.io/blog/2017/softmax-numpy.html
