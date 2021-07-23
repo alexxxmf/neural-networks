@@ -18,6 +18,7 @@ if __name__ == "__main__":
   loss_activation = Activation_Softmax_Loss_CategoricalCrossentropy()
 
   optimizer = Optimizer_SGD(decay=1e-3, momentum=0.9)
+  #optimizer = Optimizer_AdaGrad(decay=1e-3, epsilon=1e-6)
 
   for epoch in range(10001):
     # ======= FORWARD PASS =======
