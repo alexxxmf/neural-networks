@@ -55,6 +55,10 @@ For tricky derivatives/gradients like the softmax one, I rely on given python im
 
 - [How Much Training Data is Required for Machine Learning?](https://machinelearningmastery.com/much-training-data-required-machine-learning/)
 
+- [A closer look at memorization in Deep Networks](https://arxiv.org/pdf/1706.05394.pdf)
+
+- [On the geometry of generalization and memorization in deep neural networks](https://openreview.net/pdf?id=V8jrrnwGbuc)
+
 ### Random notes
 
 Softmax. How to prevent overflow when dealing with big numbershttps://nolanbconaway.github.io/blog/2017/softmax-numpy.html
@@ -102,3 +106,10 @@ Neural networks usually perform best on data consisting of **numbers in a range 
 
 There are many terms related to data ​preprocessing​: standardization, scaling, variance scaling, mean removal (as mentioned above), non-linear transformations, scaling to outliers, etc., but they are out of the scope of this book. We’re only going to scale data to a range by simply dividing all of the numbers by the maximum of their absolute values. For the example of an image that consists of numbers in the range between ​0​ and ​255​, we divide the whole dataset by ​255​ and return data in the range from ​0​ to ​1.​ We can also subtract ​127.5​ (to get a range from ​-127.5​ to 127.5)​ and divide by 127.5, returning data in the range from -1 to 1.
 It is usually fine to scale datasets that consist of larger numbers than the training data using a scaler prepared on the training data. **If the resulting numbers are slightly outside of the ​-1​ to ​1​ range, it does not affect validation or testing negatively**, since we do not train on these data.
+
+Large weights might indicate that a neuron is attempting to memorize a data element; generally, it is believed that it would be better to have many neurons contributing to a model’s output, rather than a select few
+
+### This worth to revisit
+
+- Softmax + Closs Entropy derivative
+- Optimizers, particularly the moving averages and momentums and how they are infered
