@@ -13,6 +13,8 @@ if __name__ == "__main__":
 
   activation1 = Activation_ReLU()
 
+  dropout1 = Layer_Dropout(0.1)
+
   dense2 = DenseLayer(512, 3)
 
   loss_activation = Activation_Softmax_Loss_CategoricalCrossentropy()
@@ -20,7 +22,7 @@ if __name__ == "__main__":
   # optimizer = Optimizer_SGD(decay=1e-3, momentum=0.9)
   # optimizer = Optimizer_AdaGrad(decay=1e-3, epsilon=1e-6)
   # optimizer = Optimizer_RMSprop(learning_rate=0.02, decay=1e-5, rho=0.999)
-  optimizer = Optimizer_Adam(learning_rate=0.05, decay=5e-7)
+  optimizer = Optimizer_Adam(learning_rate=0.05, decay=5e-5)
 
   for epoch in range(10001):
     # ======= FORWARD PASS =======
@@ -28,7 +30,9 @@ if __name__ == "__main__":
 
     activation1.forward(dense1.output)
 
-    dense2.forward(activation1.output)
+    dropout1.forward(activation1.output)
+
+    dense2.forward(dropout1.output)
 
     data_loss = loss_activation.forward(dense2.output, y)
 
@@ -52,6 +56,7 @@ if __name__ == "__main__":
 
     loss_activation.backward(loss_activation.output, y)
     dense2.backward(loss_activation.dinputs)
+    dropout1.backward(dense2.inputs)
     activation1.backward(dense2.dinputs)
     dense1.backward(activation1.dinputs)
 

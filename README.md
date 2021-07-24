@@ -59,6 +59,14 @@ For tricky derivatives/gradients like the softmax one, I rely on given python im
 
 - [On the geometry of generalization and memorization in deep neural networks](https://openreview.net/pdf?id=V8jrrnwGbuc)
 
+- [On dropout for regularizing NN](https://machinelearningmastery.com/dropout-for-regularizing-deep-neural-networks/)
+
+- [Dropout: A Simple Way to Prevent Neural Networks from Overfitting](https://www.cs.toronto.edu/~hinton/absps/JMLRdropout.pdf)
+
+- [Original paper that first discussed application of dropout layers: Improving neural networks by preventing co-adaptation of feature detectors](https://arxiv.org/pdf/1207.0580.pdf)
+
+- [Much more recent paper on the same topic regarding dropout: Analysis on the Dropout Effect in Convolutional Neural Networks](http://mipal.snu.ac.kr/images/1/16/Dropout_ACCV2016.pdf)
+
 ### Random notes
 
 Softmax. How to prevent overflow when dealing with big numbershttps://nolanbconaway.github.io/blog/2017/softmax-numpy.html
@@ -108,6 +116,32 @@ There are many terms related to data ​preprocessing​: standardization, scali
 It is usually fine to scale datasets that consist of larger numbers than the training data using a scaler prepared on the training data. **If the resulting numbers are slightly outside of the ​-1​ to ​1​ range, it does not affect validation or testing negatively**, since we do not train on these data.
 
 Large weights might indicate that a neuron is attempting to memorize a data element; generally, it is believed that it would be better to have many neurons contributing to a model’s output, rather than a select few
+
+Regarding the dropout method and how to compensate the de-activated neurons stake in the operation:
+
+```
+    example_output = np.array([0.27, -1.03, 0.67, 0.99, 0.05,
+    -0.37, -2.01, 1.13, -0.07, 0.73])
+
+    np.sum(example_output)
+
+    sums = []
+
+    for i in range(10000):
+        example_output2 = example_output * np.random.binomial(1, 1-dropout_rate, example_output.shape)/(1-dropout_rate)
+        sums.append(np.sum(example_output2))
+
+    np.mean(sums)
+
+```
+
+Approximately, for enough iterations we can conclude np.sum(example_output) ~ np.mean(sums)
+
+So this means we can assume that given that we de-activate some neurons, the equivalent TOTAL weight of all the neurons
+being active equals the TOTAL weight of the active neurons after applying the dropout multiplied by
+(1 / (1-dropout_rate))
+
+If we don t do this we would be making weights bigger than what they should be because of the dropout
 
 ### This worth to revisit
 
