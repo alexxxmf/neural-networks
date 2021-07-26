@@ -67,6 +67,14 @@ For tricky derivatives/gradients like the softmax one, I rely on given python im
 
 - [Much more recent paper on the same topic regarding dropout: Analysis on the Dropout Effect in Convolutional Neural Networks](http://mipal.snu.ac.kr/images/1/16/Dropout_ACCV2016.pdf)
 
+- [Some notes on cross entropy loss both categorical and binary](https://gombru.github.io/2018/05/23/cross_entropy_loss/)
+
+- [More notes on sigmoid and softmax and why/when use one or the other](https://stats.stackexchange.com/questions/233658/softmax-vs-sigmoid-function-in-logistic-classifier/#answer-410112)
+
+- [Regarding Glorot initialization](https://visualstudiomagazine.com/articles/2019/09/05/neural-network-glorot.aspx)
+
+- [Glorot vs He initialization](https://datascience.stackexchange.com/questions/13061/when-to-use-he-or-glorot-normal-initialization-over-uniform-init-and-what-are)
+
 ### Random notes
 
 Softmax. How to prevent overflow when dealing with big numbershttps://nolanbconaway.github.io/blog/2017/softmax-numpy.html
