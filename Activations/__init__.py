@@ -22,14 +22,14 @@ class Activation_Softmax():
 
 class Activation_Linear():
 
-  def __init__(self):
-    pass
+  def forward(self, inputs):
+    # No need for now to record within the object the received inputs but there might
+    # be something to do with it in the future
+    self.inputs = inputs
+    self.output = inputs
 
-  def forward(self):
-    pass
-
-  def backward(self):
-    pass
+  def backward(self, dvalues):
+   self.dinputs = dvalues.copy()
 
 
 class Activation_Sigmoid():

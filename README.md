@@ -75,6 +75,14 @@ For tricky derivatives/gradients like the softmax one, I rely on given python im
 
 - [Glorot vs He initialization](https://datascience.stackexchange.com/questions/13061/when-to-use-he-or-glorot-normal-initialization-over-uniform-init-and-what-are)
 
+- [Post with a simple plain numpy glorot init example](https://stackoverflow.com/questions/62249084/what-is-the-numpy-equivalent-of-tensorflow-xavier-initializer-for-cnn)
+
+- [Post with some explanation around He weight init method](https://pylessons.com/Deep-neural-networks-part6/)
+
+- [Interesting question regarding ReLU and linearity/non-linearity](https://datascience.stackexchange.com/questions/26475/why-is-relu-used-as-an-activation-function)
+
+- [Interesting explanation regarding initialization and breaking simmetry](https://stats.stackexchange.com/questions/45087/why-doesnt-backpropagation-work-when-you-initialize-the-weights-the-same-value)
+
 ### Random notes
 
 Softmax. How to prevent overflow when dealing with big numbershttps://nolanbconaway.github.io/blog/2017/softmax-numpy.html
