@@ -85,6 +85,8 @@ For tricky derivatives/gradients like the softmax one, I rely on given python im
 
 - [Original paper with the Glorot init method: Understanding the difficulty of training deep feedforward neural networks](http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf)
 
+- [Post on why Tanh is preferably than sigmoid](https://stats.stackexchange.com/questions/330559/why-is-tanh-almost-always-better-than-sigmoid-as-an-activation-function)
+
 ### Random notes
 
 Softmax. How to prevent overflow when dealing with big numbershttps://nolanbconaway.github.io/blog/2017/softmax-numpy.html
