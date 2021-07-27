@@ -83,6 +83,8 @@ For tricky derivatives/gradients like the softmax one, I rely on given python im
 
 - [Interesting explanation regarding initialization and breaking simmetry](https://stats.stackexchange.com/questions/45087/why-doesnt-backpropagation-work-when-you-initialize-the-weights-the-same-value)
 
+- [Original paper with the Glorot init method: Understanding the difficulty of training deep feedforward neural networks](http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf)
+
 ### Random notes
 
 Softmax. How to prevent overflow when dealing with big numbershttps://nolanbconaway.github.io/blog/2017/softmax-numpy.html
