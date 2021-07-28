@@ -4,7 +4,12 @@ from math import sqrt
 
 class Layer_Dense():
 
-  def __init__(self, *, n_neurons, inputs, weight_init_type=None, bias_init_type=None):
+  def __init__(
+    self, *, n_neurons, inputs, weight_init_type=None, bias_init_type=None,
+    weight_regularizer_l1=0, weight_regularizer_l2=0, bias_regularizer_l1=0,
+    bias_regularizer_l2=0
+  ):
+
     input_dimension = None
     if len(inputs.shape) == 1:
       # it's a vector
@@ -24,12 +29,36 @@ class Layer_Dense():
     self.weights = params['weights']
     self.biases = params['biases']
 
+    self.weight_regularizer_l1 = weight_regularizer_l1
+    self.bias_regularizer_l1 = bias_regularizer_l1
+    self.weight_regularizer_l2 = weight_regularizer_l2
+    self.bias_regularizer_l2 = bias_regularizer_l2
+
   def forward(self):
     self.output = np.dot(self.inputs, self.weights) + self.biases
 
   def backward(self, dvalues):
     self.dweights = np.dot(self.inputs.T, dvalues)
     self.dbiases = dvalues.copy()
+
+    if self.weight_regularizer_l1 > 0:
+      dL1 = np.ones_like(self.weights)
+      dL1[self.weights < 0] = -1
+      self.dweights += self.weight_regularizer_l1 * dL1
+
+    if self.weight_regularizer_l2 > 0:
+      self.dweights += 2 * self.weight_regularizer_l2 * \
+                        self.weights
+
+    if self.bias_regularizer_l1 > 0:
+      dL1 = np.ones_like(self.biases)
+      dL1[self.biases < 0] = -1
+      self.dbiases += self.bias_regularizer_l1 * dL1
+
+    if self.bias_regularizer_l2 > 0:
+      self.dbiases += 2 * self.bias_regularizer_l2 * \
+                      self.biases
+
     self.dinputs = np.dot(dvalues, self.weights.T)
 
   def initialize_weights(self, *, input_dimension, n_neurons, weight_init_type):
@@ -65,6 +94,13 @@ class Layer_Dense():
         bias_init_type=bias_init_type
       )
     }
+
+
+class Layer_Input:
+
+  def forward(self, inputs, training):
+    self.output = inputs
+
 
 class Layer_Dropout():
 
