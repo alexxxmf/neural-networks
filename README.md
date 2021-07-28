@@ -87,6 +87,8 @@ For tricky derivatives/gradients like the softmax one, I rely on given python im
 
 - [Post on why Tanh is preferably than sigmoid](https://stats.stackexchange.com/questions/330559/why-is-tanh-almost-always-better-than-sigmoid-as-an-activation-function)
 
+- [Optimizers Obverview with referenced paper included](https://ruder.io/optimizing-gradient-descent/index.html#stochasticgradientdescent)
+
 ### Random notes
 
 Softmax. How to prevent overflow when dealing with big numbershttps://nolanbconaway.github.io/blog/2017/softmax-numpy.html

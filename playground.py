@@ -10,7 +10,7 @@ from Loss import (
 )
 import numpy as np
 import nnfs
-from nnfs.datasets import spiral_data
+from nnfs.datasets import spiral_data, vertical_data
 
 
 nnfs.init()
@@ -32,4 +32,13 @@ softmax1.forward(dense_layer2.output)
 loss_function = Loss_CategoricalCrossEntropy()
 result = loss_function.calculate(softmax1.output, y)
 
-print(result)
+conf = np.argmax(softmax1.output, axis=1)
+
+m = conf == y
+
+print(np.sum(m) / len(y))
+
+
+# X, y = vertical_data(samples=100, classes=2)
+
+# print(X)
