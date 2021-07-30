@@ -7,7 +7,6 @@ For tricky derivatives/gradients like the softmax one, I rely on given python im
 
 ### TO REVIEW AGAIN FOR DEEPER UNDERSTANDING:
 
-- Softmax activation derivative (alone)
 - Common Categorical Cross-Entropy loss and Softmax activation derivative
 - Performance test. Calculating gradient for cross entropy and softmax separately and then all in one go. (HINT: joint should be around 6 to 8 times faster)
 
