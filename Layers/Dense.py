@@ -2,20 +2,13 @@ import numpy as np
 from math import sqrt
 
 
-class Layer_Dense():
+class Layer_Dense:
 
   def __init__(
-    self, *, n_neurons, inputs, weight_init_type=None, bias_init_type=None,
+    self, *, n_neurons, input_dimension, weight_init_type=None, bias_init_type=None,
     weight_regularizer_l1=0, weight_regularizer_l2=0, bias_regularizer_l1=0,
     bias_regularizer_l2=0
   ):
-
-    input_dimension = None
-    if len(inputs.shape) == 1:
-      # it's a vector
-      input_dimension = inputs.shape[0]
-    else:
-      input_dimension = inputs.shape[1]
     
     params = self.initialize_params(
       weight_init_type=weight_init_type,
@@ -23,9 +16,7 @@ class Layer_Dense():
       input_dimension=input_dimension,
       n_neurons=n_neurons
     )
-    # We need to have a record of the inputs so it can be used for backprop
-    self.inputs = inputs
-
+    
     self.weights = params['weights']
     self.biases = params['biases']
 
@@ -34,7 +25,9 @@ class Layer_Dense():
     self.weight_regularizer_l2 = weight_regularizer_l2
     self.bias_regularizer_l2 = bias_regularizer_l2
 
-  def forward(self):
+  def forward(self, inputs):
+    # We need to have a record of the inputs so it can be used for backprop
+    self.inputs = inputs
     self.output = np.dot(self.inputs, self.weights) + self.biases
 
   def backward(self, dvalues):

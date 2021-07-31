@@ -1,5 +1,5 @@
 import numpy as np
-from Loss import Loss
+from Loss.Loss import Loss
 
 
 class Loss_MeanAbsoluteError(Loss):
