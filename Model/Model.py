@@ -6,16 +6,20 @@ from Layers.Input import Layer_Input
 class Model:
 
   def __init__(self):
-    self.layers = []
-    self.softmax_classifier_output = None
-  
-  def add(self, layer):
-    self.layers.append(layer)
+      # Create a list of network objects
+      self.layers = []
+      # Softmax classifier's output object
+      self.softmax_classifier_output = None
 
+  # Add objects to the model
+  def add(self, layer):
+      self.layers.append(layer)
+
+  # Set loss, optimizer and accuracy
   def set(self, *, loss, optimizer, accuracy):
-    self.loss = loss
-    self.optimizer = optimizer
-    self.accuracy = accuracy
+      self.loss = loss
+      self.optimizer = optimizer
+      self.accuracy = accuracy
 
   def finalize(self):
     self.input_layer = Layer_Input()
@@ -107,7 +111,7 @@ class Model:
       self.softmax_classifier_output.dinputs
 
       for layer in reversed(self.layers[:-1]):
-        layer.backward(layer.next.dinputs)
+        layer.backward(layer.next_layer.dinputs)
       
       return
 

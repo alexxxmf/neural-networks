@@ -12,16 +12,16 @@ class Accuracy:
     # some stuff will be done for us
     accuracy = np.mean(comparisons)
 
-    self.accumulated_sum += np.sum(comparisons)
-    self.accumulated_count += len(comparisons)
+    # self.accumulated_sum += np.sum(comparisons)
+    # self.accumulated_count += len(comparisons)
 
     return accuracy
   
-  def calculate_accumulated(self):
-    accuracy = self.accumulated_sum / self.accumulated_count
+  # def calculate_accumulated(self):
+  #   accuracy = self.accumulated_sum / self.accumulated_count
 
-    return accuracy
+  #   return accuracy
 
-  def new_pass(self):
-    self.accumulated_sum = 0
-    self.accumulated_count = 0
+  # def new_pass(self):
+  #   self.accumulated_sum = 0
+  #   self.accumulated_count = 0

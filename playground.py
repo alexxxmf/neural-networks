@@ -1,11 +1,11 @@
 from Loss.BinaryCrossEntropy import Loss_BinaryCrossEntropy
-from nn import Accuracy_Categorical, Activation_Sigmoid, Activation_Softmax
 import Loss
 import Model
 from Layers.Dense import Layer_Dense
 from Activations.ReLU import (
   Activation_ReLU
 )
+from Activations.Softmax import Activation_Softmax
 from Activations.Linear import Activation_Linear
 from Loss.CategoricalCrossEntropy import (
   Loss_CategoricalCrossEntropy,
@@ -16,6 +16,7 @@ from Loss.MeanSquaredError import (
 from Optimizers.Adam import Optimizer_Adam
 from Optimizers.AdaGrad import Optimizer_AdaGrad
 from Accuracy.Regression import Accuracy_Regression
+from Accuracy.Categorical import Accuracy_Categorical
 import numpy as np
 import nnfs
 from nnfs.datasets import spiral_data, vertical_data, sine_data

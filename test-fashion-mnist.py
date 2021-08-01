@@ -28,6 +28,8 @@ image_data = cv2.imread('fashion_mnist_images/train/7/0002.png', cv2.IMREAD_UNCH
 
 labels = os.listdir(f'{FOLDER}/train')
 
+print(image_data)
+
 X = []
 y = []
 
