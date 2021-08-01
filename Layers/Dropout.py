@@ -10,7 +10,6 @@ class Layer_Dropout:
     self.inputs = inputs
 
     if not training:
-      
       self.output = inputs.copy()
       return
 

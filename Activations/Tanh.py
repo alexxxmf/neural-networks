@@ -3,7 +3,7 @@ from math import exp
 
 class Activation_Tanh():
 
-  def normalized_sigmoid(self, inputs):
+  def normalized_sigmoid(self, inputs, training=False):
     # this could potentially cause an overflow because of the exp explosion
     # normally this is the formula for the sigmoid 1 / (1 + np.exp(-inputs))
     # for an exp big enough we could run into an overflow
@@ -21,3 +21,6 @@ class Activation_Tanh():
   def backward(self, dvalues):
     self.dvalues = dvalues
     self.dinputs = 1 - (2 * self.normalized_sigmoid(2 * dvalues) - 1) ** 2
+  
+  def predictions(self, outputs):
+    return (outputs > 0) * 1

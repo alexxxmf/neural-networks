@@ -4,7 +4,7 @@ from math import exp
 
 class Activation_Softmax():
 
-  def forward(self, inputs):
+  def forward(self, inputs, training=False):
     # exp_values = np.exp(inputs)
     # self.output = exp_values / np.sum(exp_values, axis=1, keepdims=True)
     # This expression above it could be the regular way to solve the softmax but we need to be
@@ -26,4 +26,7 @@ class Activation_Softmax():
         jacobian_matrix = np.diagflat(single_output) - np.dot(single_output, single_output.T)
 
         self.dinputs[index] = np.dot(jacobian_matrix, single_dvalues)
+
+  def predictions(self, outputs):
+    return np.argmax(outputs, axis=1)
 

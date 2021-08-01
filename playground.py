@@ -1,3 +1,5 @@
+from Loss.BinaryCrossEntropy import Loss_BinaryCrossEntropy
+from nn import Accuracy_Categorical, Activation_Sigmoid, Activation_Softmax
 import Loss
 import Model
 from Layers.Dense import Layer_Dense
@@ -12,73 +14,41 @@ from Loss.MeanSquaredError import (
   Loss_MeanSquaredError,
 )
 from Optimizers.Adam import Optimizer_Adam
+from Optimizers.AdaGrad import Optimizer_AdaGrad
+from Accuracy.Regression import Accuracy_Regression
 import numpy as np
 import nnfs
 from nnfs.datasets import spiral_data, vertical_data, sine_data
 from Model.Model import Model
+from Layers.Dropout import Layer_Dropout
 
 
 nnfs.init()
 
-X, y = sine_data()
-
-inputs = np.array([[0.2, 0.1, 0.3], [0.1, 0.3, 0.1]])
-
-# dense_layer1 = Layer_Dense(inputs=X, n_neurons=64, weight_init_type='glorot', bias_init_type='zeros')
-# dense_layer1.forward()
-# relu1 = Activation_ReLU()
-# relu1.forward(inputs=dense_layer1.output)
-
-# dense_layer2 = Layer_Dense(inputs=relu1.output, n_neurons=3, weight_init_type='glorot', bias_init_type='zeros')
-# dense_layer2.forward()
-# softmax1 = Activation_Softmax()
-# softmax1.forward(dense_layer2.output)
-
-# loss_function = Loss_CategoricalCrossEntropy()
-# result = loss_function.calculate(softmax1.output, y)
-
-# conf = np.argmax(softmax1.output, axis=1)
-
-# m = conf == y
-
-# print(np.sum(m) / len(y))
-
-
-# X, y = vertical_data(samples=100, classes=2)
-
-# print(X)
+X, y = spiral_data(samples=1000, classes=3)
+X_test, y_test = spiral_data(samples=100, classes=3)
 
 model = Model()
 
 model.add(Layer_Dense(
-  input_dimension=1,
-  n_neurons=64,
-  weight_init_type='glorot',
-  bias_init_type='zeros'
+  input_dimension=2,
+  n_neurons=512,
+  weight_regularizer_l2=5e-4,
+  bias_regularizer_l2=5e-4
 ))
 model.add(Activation_ReLU())
-model.add(Layer_Dense(
-  input_dimension=64,
-  n_neurons=64,
-  weight_init_type='glorot',
-  bias_init_type='zeros'
-))
-model.add(Activation_ReLU())
-model.add(Layer_Dense(
-  input_dimension=64,
-  n_neurons=1,
-  weight_init_type='glorot',
-  bias_init_type='zeros'
-))
-model.add(Activation_Linear())
+model.add(Layer_Dropout(0.1))
+
+model.add(Activation_Softmax())
 
 model.set(
-  loss=Loss_MeanSquaredError(),
-  optimizer=Optimizer_Adam(learning_rate=0.005, decay=1e-3)
+  loss=Loss_CategoricalCrossEntropy(),
+  optimizer=Optimizer_Adam(learning_rate=0.05, decay=5e-5),
+  accuracy=Accuracy_Categorical()
 )
 
 model.finalize()
 
-model.train(X, y, epochs=10000, print_every=300)
+model.train(X, y, validation_data=(X_test, y_test), 
+            epochs=10000, print_every=100)
 
-print(model.layers)

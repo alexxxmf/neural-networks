@@ -1,5 +1,5 @@
 import numpy as np
-from Accuracy import Accuracy
+from Accuracy.Accuracy import Accuracy
 
 
 class Accuracy_Regression(Accuracy):

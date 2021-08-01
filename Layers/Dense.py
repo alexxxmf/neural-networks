@@ -25,14 +25,14 @@ class Layer_Dense:
     self.weight_regularizer_l2 = weight_regularizer_l2
     self.bias_regularizer_l2 = bias_regularizer_l2
 
-  def forward(self, inputs):
+  def forward(self, inputs, training=False):
     # We need to have a record of the inputs so it can be used for backprop
     self.inputs = inputs
     self.output = np.dot(self.inputs, self.weights) + self.biases
 
   def backward(self, dvalues):
     self.dweights = np.dot(self.inputs.T, dvalues)
-    self.dbiases = dvalues.copy()
+    self.dbiases = np.sum(dvalues, axis=0, keepdims=True)
 
     if self.weight_regularizer_l1 > 0:
       dL1 = np.ones_like(self.weights)

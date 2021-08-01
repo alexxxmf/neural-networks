@@ -21,7 +21,7 @@ class Optimizer_AdaGrad:
       layer.bias_cache = np.zeros_like(layer.biases)
 
     layer.weight_cache += layer.dweights ** 2
-    layer.bias_cache += layer.bias ** 2  
+    layer.bias_cache += layer.biases ** 2  
     
     weight_updates = - layer.dweights * (self.current_learning_rate / \
       (np.sqrt(layer.weight_cache) + self.epsilon))

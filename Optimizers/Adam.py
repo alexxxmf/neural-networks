@@ -19,7 +19,6 @@ class Optimizer_Adam:
             (1. / (1. + self.decay * self.iterations))
 
   def update_params(self, layer):
-
     if not hasattr(layer, 'weight_cache'):
         layer.weight_momentums = np.zeros_like(layer.weights)
         layer.weight_cache = np.zeros_like(layer.weights)

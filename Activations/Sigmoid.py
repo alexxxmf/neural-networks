@@ -15,10 +15,14 @@ class Activation_Sigmoid():
       lambda x: 1 / (1 + exp(-x)) if x<0 else exp(x) / (1 + exp(x))
     )(inputs)
 
-  def forward(self, inputs):
+  def forward(self, inputs, training=False):
     self.inputs = inputs
     self.output = self.normalized_sigmoid(inputs)
 
   def backward(self, dvalues):
     self.dvalues = dvalues
     self.dinputs = self.normalized_sigmoid(dvalues) * (1 - self.normalized_sigmoid(dvalues))
+
+  def predictions(self, outputs):
+    return (outputs > 0.5) * 1
+  
