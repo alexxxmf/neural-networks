@@ -6,6 +6,7 @@ import urllib.request
 from zipfile import ZipFile
 import cv2
 import matplotlib.pyplot as plt
+from utils.data_fns import create_data_mnist
 
 np.set_printoptions(linewidth=200)
 
@@ -24,13 +25,9 @@ if not os.path.isdir(FOLDER):
 
   print('Done!')
 
-image_data = cv2.imread('fashion_mnist_images/train/7/0002.png', cv2.IMREAD_UNCHANGED)
+X, y, X_test, y_test = create_data_mnist(FOLDER)
 
-labels = os.listdir(f'{FOLDER}/train')
+X = (X.astype(np.float32) - 127.5) / 127.5
+X_test = (X_test.astype(np.float32) - 127.5) / 127.5
 
-print(image_data)
-
-X = []
-y = []
-
-
+print(X.shape)
