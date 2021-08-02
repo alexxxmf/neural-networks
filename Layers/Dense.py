@@ -87,3 +87,10 @@ class Layer_Dense:
         bias_init_type=bias_init_type
       )
     }
+
+  def get_parameters(self):
+    return self.weights, self.biases
+  
+  def set_parameters(self, weights, biases):
+    self.weights = weights
+    self.biases = biases
