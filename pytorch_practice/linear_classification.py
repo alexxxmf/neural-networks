@@ -7,6 +7,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
 TEST_SIZE_PCT = 0.33
+N_EPOCHS = 3000
+PRINT_EVERY = 30
 
 data = load_breast_cancer()
 
@@ -18,3 +20,41 @@ scaler = StandardScaler()
 
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.fit_transform(X_test)
+
+X_train = torch.from_numpy(X_train.astype(np.float32))
+X_test = torch.from_numpy(X_test.astype(np.float32))
+Y_train = torch.from_numpy(y_train.astype(np.float32).reshape(-1, 1))
+Y_test = torch.from_numpy(y_test.astype(np.float32).reshape(-1, 1))
+
+
+model = nn.Sequential(
+    nn.Linear(X_train.shape[1], 1),
+    nn.Sigmoid()
+)
+
+loss_function = nn.BCELoss()
+optimizer = torch.optim.Adam(model.parameters())
+
+train_loses = np.zeros(N_EPOCHS)
+test_loses = np.zeros(N_EPOCHS)
+
+for i in range(N_EPOCHS):
+  # https://stackoverflow.com/questions/48001598/why-do-we-need-to-call-zero-grad-in-pytorch
+  # regarding why we need to explicitly set gradients to cero for the optimizer
+  optimizer.zero_grad()
+
+  outputs = model(X_train)
+
+  loss = loss_function(outputs, Y_train)
+
+  loss.backward()
+  optimizer.step()
+
+  outputs_test = model(X_test)
+  loss_test = loss_function(outputs_test, Y_test) 
+
+  train_loses[i] = loss.item()
+  test_loses[i] = loss_test.item()
+
+  if (i + 1) % PRINT_EVERY ==0:
+    print(f'Epoch {i+1}/{N_EPOCHS}, Train loss: {loss.item():.4f}, Test loss: {loss_test.item():.4f}')
