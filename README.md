@@ -88,6 +88,10 @@ For tricky derivatives/gradients like the softmax one, I rely on given python im
 
 - [Optimizers Obverview with referenced paper included](https://ruder.io/optimizing-gradient-descent/index.html#stochasticgradientdescent)
 
+- [Biologically inspired activation functions](https://arxiv.org/pdf/1804.11237.pdf)
+
+- [Some notebooks with experiments on BRU activation (bionodal root unit)](https://github.com/marek-kan/Bionodal-root-units)
+
 ### Random notes
 
 Softmax. How to prevent overflow when dealing with big numbershttps://nolanbconaway.github.io/blog/2017/softmax-numpy.html
