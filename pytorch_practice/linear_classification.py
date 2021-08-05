@@ -10,6 +10,7 @@ TEST_SIZE_PCT = 0.33
 N_EPOCHS = 3000
 PRINT_EVERY = 30
 
+
 data = load_breast_cancer()
 
 X_train, X_test, y_train, y_test = train_test_split(data.data, data.target, test_size=TEST_SIZE_PCT)
@@ -58,3 +59,18 @@ for i in range(N_EPOCHS):
 
   if (i + 1) % PRINT_EVERY ==0:
     print(f'Epoch {i+1}/{N_EPOCHS}, Train loss: {loss.item():.4f}, Test loss: {loss_test.item():.4f}')
+
+# torch.no_grad() impacts the autograd engine and deactivate it.
+# It will reduce memory usage and speed up computations but it s not possible to do backprop\
+# this has to do with the fact that by default for every tensor operation autograd acumulates gradients
+# for when the derivation time comes (backprop | gradient)
+with torch.no_grad():
+  p_train = model(X_train)
+  p_train = np.round(p_train.numpy())
+  train_acc = np.mean(Y_train.numpy() == p_train)
+
+  p_test = model(X_test)
+  p_test = np.round(p_test.numpy())
+  test_acc = np.mean(Y_test.numpy() == p_test)
+
+print(f'Train accuracy: {train_acc:.4f}, Test accuracy: {test_acc:.4f}')
