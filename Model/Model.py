@@ -1,5 +1,6 @@
 import pickle
 import copy
+import numpy as np
 
 from Loss.CategoricalCrossEntropy import Loss_CategoricalCrossEntropy
 from Activations.Softmax import Activation_Softmax
@@ -224,9 +225,31 @@ class Model:
     with open(path, 'wb') as f:
       pickle.dump(model, f)
 
+  def predict(self, X, *, batch_size=None):
+    prediction_steps = 1
+
+    if batch_size is not None:
+      prediction_steps = len(X) // batch_size
+      if prediction_steps * batch_size < len(X):
+        prediction_steps += 1
+
+    output = []
+
+    for step in range(prediction_steps):
+      if batch_size is not None:
+        batch_X = X
+      else:
+        batch_X = X[step*batch_size:(step+1)*batch_size]
+
+      batch_output = self.forward(batch_X, training=False)
+      output.append(batch_output)
+    
+    return np.vpstack(output)
+
   @staticmethod
   def load(path):
     with open(path, 'rb') as f:
       model = pickle.load(f)
 
     return model
+
