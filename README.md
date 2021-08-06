@@ -92,6 +92,8 @@ For tricky derivatives/gradients like the softmax one, I rely on given python im
 
 - [Some notebooks with experiments on BRU activation (bionodal root unit)](https://github.com/marek-kan/Bionodal-root-units)
 
+- [Regarding extending pytorch activation functions for state of the art stuff](https://www.kaggle.com/aleksandradeis/extending-pytorch-with-custom-activation-functions)
+
 ### Random notes
 
 Softmax. How to prevent overflow when dealing with big numbershttps://nolanbconaway.github.io/blog/2017/softmax-numpy.html
