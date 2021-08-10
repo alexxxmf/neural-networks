@@ -39,15 +39,23 @@ optimizer = torch.optim.Adam(model.parameters(), lr=0.1, weight_decay=0.1)
 
 n_epochs = 300
 
+train_loses = np.zeros(n_epochs)
+test_loses = np.zeros(n_epochs)
+
 for i in range(n_epochs):
   optimizer.zero_grad()
 
   outputs = model(X_train)
-  loss = loss_function(outputs, y_train)
+  train_loss = loss_function(outputs, y_train)
 
-  loss.item()
+  train_loses[i] = train_loss.item()
 
-  loss.backward()
+  train_loss.backward()
   optimizer.step()
 
-  print(f'epoch: {i}/{n_epochs}, Loss: {loss.item():.4f}')
+  test_loss = loss_function(outputs, y_test)
+  test_loses[i] = train_loss.item()
+
+  
+  if (i + 1) % 50 == 0:
+    print(f'Epoch: {i + 1}/{n_epochs}, Train Loss: {train_loss.item():.4f}, Test Loss: {test_loss.item()}')
