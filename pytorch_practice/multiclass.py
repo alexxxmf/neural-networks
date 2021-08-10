@@ -92,3 +92,36 @@ for i in range(n_epochs):
   test_losses[i] = test_loss
 
   print(f'Epoch {i+1}/{n_epochs}, Train Loss: {train_loss:.4f}, Test Loss: {test_loss:.4f}')
+
+n_correct = 0.
+n_total = 0.
+
+for inputs, targets in train_loader:
+  inputs, targets = inputs.to(device), targets.to(device)
+
+  inputs = inputs.view(-1, 784)
+
+  outputs = model(inputs)
+
+  _, predictions = torch.max(outputs, 1)
+
+  n_correct += (predictions == targets).sum().item()
+  n_total += targets.shape[0]
+
+train_acc = n_correct / n_total
+
+for inputs, targets in test_loader:
+  inputs, targets = inputs.to(device), targets.to(device)
+
+  inputs = inputs.view(-1, 784)
+
+  outputs = model(inputs)
+
+  _, predictions = torch.max(outputs, 1)
+
+  n_correct += (predictions == targets).sum().item()
+  n_total += targets.shape[0]
+
+test_acc = n_correct / n_total
+
+print(f'Train acc: {train_acc:.4f}, Test acc: {test_acc:.4f}')
