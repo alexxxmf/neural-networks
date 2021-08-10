@@ -94,6 +94,8 @@ For tricky derivatives/gradients like the softmax one, I rely on given python im
 
 - [Regarding extending pytorch activation functions for state of the art stuff](https://www.kaggle.com/aleksandradeis/extending-pytorch-with-custom-activation-functions)
 
+- [Interesting plain explanation why Stochastic Gradient Descent](https://datascience.stackexchange.com/questions/36450/what-is-the-difference-between-gradient-descent-and-stochastic-gradient-descent)
+
 ### Random notes
 
 Softmax. How to prevent overflow when dealing with big numbershttps://nolanbconaway.github.io/blog/2017/softmax-numpy.html
