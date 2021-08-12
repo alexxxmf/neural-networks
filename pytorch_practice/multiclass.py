@@ -10,6 +10,8 @@ from sklearn.preprocessing import StandardScaler
 import torchvision
 import torchvision.transforms as transforms
 import cv2
+from sklearn.metrics import confusion_matrix
+import itertools
 
 train_dataset = torchvision.datasets.MNIST(
     root='./datasets',
@@ -125,3 +127,51 @@ for inputs, targets in test_loader:
 test_acc = n_correct / n_total
 
 print(f'Train acc: {train_acc:.4f}, Test acc: {test_acc:.4f}')
+
+def plot_confusion_matrix(cm, classes,
+                           normalize=False,
+                           title='Confusion matrix',
+                           cmap=plt.cm.Blues):
+  
+  if normalize:
+    cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+    print("Normalized confusion matrix")
+  else:
+    print("Confusion matrix, without normalization")
+
+  print(cm)
+  
+  plt.imshow(cm, interpolation='nearest', cmap=cmap)
+  plt.title(title)
+  plt.colorbar()
+  tick_marks = np.arange(len(classes))
+  plt.xticks(tick_marks, classes, rotation=45)
+  plt.yticks(tick_marks, classes)
+  
+  fmt = '.2f' if normalize else 'd'
+  thresh = cm.max() / 2.
+  for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+      plt.text(j, i, cm[i, j],
+                horizontalalignment="center",
+                color="white" if cm[i, j] > thresh else "black")
+
+  plt.tight_layout()
+  plt.ylabel('True label')
+  plt.xlabel('Predicted label')
+
+x_test = test_dataset.data.numpy()
+y_test = test_dataset.targets.numpy()
+p_test = np.array([])
+for inputs, targets in test_loader:
+  inputs = inputs.to(device)
+
+  inputs = inputs.view(-1, 784)
+  
+  outputs = model(inputs)
+
+  _, predictions = torch.max(outputs, 1)
+
+  p_test = np.concatenate((p_test, predictions.cpu().numpy()))
+
+cm = confusion_matrix(y_test, p_test)
+plot_confusion_matrix(cm, list(range(10)))
