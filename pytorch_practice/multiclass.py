@@ -175,3 +175,9 @@ for inputs, targets in test_loader:
 
 cm = confusion_matrix(y_test, p_test)
 plot_confusion_matrix(cm, list(range(10)))
+
+# Getting a random example of a wrong prediction
+misclassified_example = np.where(p_test != y_test)[0]
+i = np.random.choice(misclassified_example)
+plt.imshow(x_test[i], cmap='gray')
+plt.title('True label: %s Predicted %s' % (y_test[i], int(p_test[i])))
