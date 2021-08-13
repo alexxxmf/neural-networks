@@ -128,6 +128,8 @@ test_acc = n_correct / n_total
 
 print(f'Train acc: {train_acc:.4f}, Test acc: {test_acc:.4f}')
 
+# Stolen from here to avoid the import
+# https://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html
 def plot_confusion_matrix(cm, classes,
                            normalize=False,
                            title='Confusion matrix',
