@@ -13,3 +13,12 @@ fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 ax.scatter(X[:, 0], X[:, 1], Y)
 plt.show()
+
+model = nn.Sequential(
+    nn.Linear(2, 128),
+    nn.ReLU(),
+    nn.Linear(128, 1)
+)
+
+loss = nn.MSELoss()
+optimizer = torch.optim.Adam(model.parameters())
