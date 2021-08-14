@@ -23,23 +23,30 @@ model = nn.Sequential(
 loss_function = nn.MSELoss()
 optimizer = torch.optim.Adam(model.parameters())
 
-n_epochs = 3000
+def train(model, criterion, optimizer, X_train, y_train, epochs=1000, print_every=100):
 
-recorded_losses = np.zeros(3000)
+  train_losses = np.zeros(epochs)
 
-for i in range(n_epochs):
-  epoch = i + 1
-  optimizer.zero_grad()
+  for i in range(epochs):
+    epoch = i + 1
+    optimizer.zero_grad()
 
-  output = model(torch.from_numpy(X.astype(np.float32)))
-  loss = loss_function(output, torch.from_numpy(Y.astype(np.float32)).reshape(-1, 1))
+    output = model(X_train)
+    loss = criterion(output, y_train)
 
-  loss.backward()
-  optimizer.step()
+    loss.backward()
+    optimizer.step()
 
-  recorded_losses[i] = loss.item()
+    train_losses[i] = loss.item()
 
-  if epoch % 500:
-    print(f'Epoch: {i+1}, Loss: {loss.item()}')
+    if epoch % print_every == 0:
+      print(f'Epoch: {epoch}/{epochs}, Loss: {loss.item()}')
+    
+  return train_losses
 
-plt.plot(recorded_losses)
+X_train = torch.from_numpy(X.astype(np.float32))
+y_train = torch.from_numpy(Y.astype(np.float32)).reshape(-1, 1)
+
+train_losses = train(model, loss_function, optimizer, X_train, y_train)
+
+plt.plot(train_losses)
