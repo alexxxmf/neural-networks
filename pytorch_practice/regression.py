@@ -40,7 +40,7 @@ def train(model, criterion, optimizer, X_train, y_train, epochs=1000, print_ever
     train_losses[i] = loss.item()
 
     if epoch % print_every == 0:
-      print(f'Epoch: {epoch}/{epochs}, Loss: {loss.item()}')
+      print(f'Epoch: {epoch}/{epochs}, Loss: {loss.item():.4f}')
     
   return train_losses
 
