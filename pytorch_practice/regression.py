@@ -50,3 +50,17 @@ y_train = torch.from_numpy(Y.astype(np.float32)).reshape(-1, 1)
 train_losses = train(model, loss_function, optimizer, X_train, y_train)
 
 plt.plot(train_losses)
+
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.scatter(X[:, 0], X[:, 1], Y)
+
+with torch.no_grad():
+  line = np.linspace(-3, 3, 50)
+  xx, yy = np.meshgrid(line, line)
+  Xgrid = np.vstack((xx.flatten(), yy.flatten())).T
+  Xgrid_torch = torch.from_numpy(Xgrid.astype(np.float32))
+  Yhat = model(Xgrid_torch).numpy().flatten()
+  ax.plot_trisurf(Xgrid[:,0], Xgrid[:,1], Yhat, linewidth=0.2, antialiased=True)
+  plt.show()
+
