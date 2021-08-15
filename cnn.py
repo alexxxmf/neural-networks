@@ -100,11 +100,11 @@ def convolve(img, conv_filter):
   
   return feature_maps
 
-feature_maps = convolve(img, l1_filter)
+l1_feature_maps = convolve(img, l1_filter)
 
 # Printing both feature maps just to take a look
-plt.imshow(feature_maps[:,:,0], cmap='gray')
-plt.imshow(feature_maps[:,:,1], cmap='gray')
+plt.imshow(l1_feature_maps[:,:,0], cmap='gray')
+plt.imshow(l1_feature_maps[:,:,1], cmap='gray')
 
 def relu_forward(f_maps):
   relu_out = np.zeros(f_maps.shape)
@@ -114,5 +114,25 @@ def relu_forward(f_maps):
 
   return relu_out
 
-feature_maps_relu = relu_forward(feature_maps)
+l1_feature_maps_relu = relu_forward(l1_feature_maps)
 
+# Checking how the f. maps look post-relu stage
+plt.imshow(l1_feature_maps_relu[:,:, 0], cmap='gray')
+plt.imshow(l1_feature_maps_relu[:,:, 1], cmap='gray')
+
+def pooling(feature_map, size=2, stride=2):
+  # Preparing the output of the pooling operation.
+  pool_out = np.zeros((np.uint16((feature_map.shape[0]-size+1)/stride),
+                          np.uint16((feature_map.shape[1]-size+1)/stride),
+                          feature_map.shape[-1]))
+  for map_num in range(feature_map.shape[-1]):
+    r2 = 0
+    for r in np.arange(0,feature_map.shape[0]-size-1, stride):
+      c2 = 0
+      for c in np.arange(0, feature_map.shape[1]-size-1, stride):
+        pool_out[r2, c2, map_num] = np.max([feature_map[r:r+size,  c:c+size, map_num]])
+        c2 = c2 + 1
+      r2 = r2 +1
+  return pool_out
+
+l1_feature_map_relu_pool = pooling(l1_feature_maps_relu, 2, 2)
