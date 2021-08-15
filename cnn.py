@@ -27,6 +27,7 @@ l1_filter[1, :, :] = np.array([[[1,   1,  1],
 def conv_(img, conv_filter):
   filter_size = conv_filter.shape[1]
   result = np.zeros((img.shape))
+
   #Looping through the image to apply the convolution operation.
   for r in np.uint16(np.arange(filter_size/2.0, img.shape[0]-filter_size/2.0+1)):
     for c in np.uint16(np.arange(filter_size/2.0, img.shape[1]-filter_size/2.0+1)):
@@ -98,3 +99,20 @@ def convolve(img, conv_filter):
     feature_maps[:, :, filter_num] = conv_map
   
   return feature_maps
+
+feature_maps = convolve(img, l1_filter)
+
+# Printing both feature maps just to take a look
+plt.imshow(feature_maps[:,:,0], cmap='gray')
+plt.imshow(feature_maps[:,:,1], cmap='gray')
+
+def relu_forward(f_maps):
+  relu_out = np.zeros(f_maps.shape)
+
+  for i in range(f_maps.shape[-1]):
+    relu_out[:,:,i] = np.maximum(0, f_maps[:,:,i])
+
+  return relu_out
+
+feature_maps_relu = relu_forward(feature_maps)
+
