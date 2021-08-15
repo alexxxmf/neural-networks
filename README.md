@@ -96,6 +96,8 @@ For tricky derivatives/gradients like the softmax one, I rely on given python im
 
 - [Interesting plain explanation why Stochastic Gradient Descent](https://datascience.stackexchange.com/questions/36450/what-is-the-difference-between-gradient-descent-and-stochastic-gradient-descent)
 
+- [Example of a 2D convolution](http://www.songho.ca/dsp/convolution/convolution2d_example.html)
+
 ### Random notes
 
 Softmax. How to prevent overflow when dealing with big numbershttps://nolanbconaway.github.io/blog/2017/softmax-numpy.html
