@@ -48,13 +48,15 @@ class CNN(nn.Module):
     self.dense_layers = nn.Sequential(
       nn.Dropout(0.2),
       nn.Linear(128 * 2 * 2, 512),
-      nn.ReLU()
+      nn.ReLU(),
+      nn.Dropout(0.2),
+      nn.Linear(512, K),
     )
 
   def forward(self, X):
     output = self.conv_layers(X)
-    output.view(output.size(0), -1)
-    return self.dense_layers(output)
+    flattened_output = output.view(output.size(0), -1)
+    return self.dense_layers(flattened_output)
 
 
 model = CNN(K)
@@ -117,3 +119,84 @@ def train(model, criterion, optimizer, train_loader, test_loader, epochs):
 
 train_losses, test_losses = train(
   model, loss_function, optimizer, train_loader, test_loader, epochs=15)
+
+plt.plot(train_losses, label='train loss')
+plt.plot(test_losses, label='test loss')
+plt.legend()
+plt.show()
+
+n_correct = 0.
+n_total = 0.
+
+for inputs, targets in train_loader:
+  inputs, targets = inputs.to(device), targets.to(device)
+
+  outputs = model(inputs)
+
+  _, predictions = torch.max(outputs, 1)
+
+  n_correct += (predictions == targets).sum().item()
+  n_total += targets.shape[0]
+
+train_acc = n_correct / n_total
+
+for inputs, targets in test_loader:
+  inputs, targets = inputs.to(device), targets.to(device)
+
+  outputs = model(inputs)
+
+  _, predictions = torch.max(outputs, 1)
+
+  n_correct += (predictions == targets).sum().item()
+  n_total += targets.shape[0]
+
+test_acc = n_correct / n_total
+
+print(f'Train accuracy: {train_acc:.4f}, Test accuracy: {test_acc:.4f}') 
+
+def plot_confusion_matrix(cm, classes,
+                           normalize=False,
+                           title='Confusion matrix',
+                           cmap=plt.cm.Blues):
+  
+  if normalize:
+    cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+    print("Normalized confusion matrix")
+  else:
+    print("Confusion matrix, without normalization")
+
+  print(cm)
+  
+  plt.imshow(cm, interpolation='nearest', cmap=cmap)
+  plt.title(title)
+  plt.colorbar()
+  tick_marks = np.arange(len(classes))
+  plt.xticks(tick_marks, classes, rotation=45)
+  plt.yticks(tick_marks, classes)
+  
+  fmt = '.2f' if normalize else 'd'
+  thresh = cm.max() / 2.
+  for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+      plt.text(j, i, cm[i, j], fmt,
+                horizontalalignment="center",
+                color="white" if cm[i, j] > thresh else "black")
+
+  plt.tight_layout()
+  plt.ylabel('True label')
+  plt.xlabel('Predicted label')
+
+x_test = test_dataset.data.numpy()
+y_test = test_dataset.targets.numpy()
+p_test = np.array([])
+for inputs, targets in test_loader:
+  inputs, targets = inputs.to(device), targets.to(device)
+  
+  outputs = model(inputs)
+
+  _, predictions = torch.max(outputs, 1)
+
+  p_test = np.concatenate((p_test, predictions.cpu().numpy()))
+
+cm = confusion_matrix(y_test, p_test)
+
+plot_confusion_matrix(cm, list(range(10)))
