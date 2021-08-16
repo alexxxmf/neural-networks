@@ -47,6 +47,8 @@ class CNN(nn.Module):
     )
     self.dense_layers = nn.Sequential(
       nn.Dropout(0.2),
+      # Here is a way to calculate the output of the last conv layer so we can plug it here
+      # https://stackoverflow.com/questions/34739151/calculate-dimension-of-feature-maps-in-convolutional-neural-network
       nn.Linear(128 * 2 * 2, 512),
       nn.ReLU(),
       nn.Dropout(0.2),
