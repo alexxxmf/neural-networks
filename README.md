@@ -98,6 +98,12 @@ For tricky derivatives/gradients like the softmax one, I rely on given python im
 
 - [Example of a 2D convolution](http://www.songho.ca/dsp/convolution/convolution2d_example.html)
 
+- [Pytorch autograd system explained](https://www.youtube.com/watch?v=MswxJw-8PvE)
+
+- [Numpy-only CNN implementation](https://becominghuman.ai/only-numpy-implementing-convolutional-neural-network-using-numpy-deriving-forward-feed-and-back-458a5250d6e4)
+
+- [Sparsemax: from paper to code implementation](https://medium.com/deeplearningmadeeasy/sparsemax-from-paper-to-code-351e9b26647b)
+
 ### Random notes
 
 Softmax. How to prevent overflow when dealing with big numbershttps://nolanbconaway.github.io/blog/2017/softmax-numpy.html
