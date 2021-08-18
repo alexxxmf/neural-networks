@@ -104,6 +104,8 @@ For tricky derivatives/gradients like the softmax one, I rely on given python im
 
 - [Sparsemax: from paper to code implementation](https://medium.com/deeplearningmadeeasy/sparsemax-from-paper-to-code-351e9b26647b)
 
+- [Interesting paper, beginner friendly. CNN](https://www.reddit.com/r/learnmachinelearning/comments/llstam/i_found_a_paper_on_neural_style_transfer_and_i/)
+
 ### Random notes
 
 Softmax. How to prevent overflow when dealing with big numbershttps://nolanbconaway.github.io/blog/2017/softmax-numpy.html
