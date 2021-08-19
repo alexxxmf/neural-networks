@@ -106,6 +106,10 @@ For tricky derivatives/gradients like the softmax one, I rely on given python im
 
 - [Interesting paper, beginner friendly. CNN](https://www.reddit.com/r/learnmachinelearning/comments/llstam/i_found_a_paper_on_neural_style_transfer_and_i/)
 
+- [Nice post with a really good recommendation on implementing a list of 26 papers](https://www.reddit.com/r/MachineLearning/comments/8vmuet/d_what_deep_learning_papers_should_i_implement_to/)
+
+- [Video on how to implement dropblock paper](https://www.youtube.com/watch?v=GcvGxXePI2g&list=PLTl9hO2Oobd8UboKp8CyxomVqXyOfOjXe&index=2)
+
 ### Random notes
 
 Softmax. How to prevent overflow when dealing with big numbershttps://nolanbconaway.github.io/blog/2017/softmax-numpy.html
