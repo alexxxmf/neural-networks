@@ -110,6 +110,10 @@ For tricky derivatives/gradients like the softmax one, I rely on given python im
 
 - [Video on how to implement dropblock paper](https://www.youtube.com/watch?v=GcvGxXePI2g&list=PLTl9hO2Oobd8UboKp8CyxomVqXyOfOjXe&index=2)
 
+- [Short and concise mention to H&W cat experiment and how they discovered how the brain works, tighly related with how CNN work](https://www.historyofinformation.com/detail.php?id=4261)
+
+- [More on Hubel and Wiesel experiment and how it relates to CNN studies](https://www.esantus.com/blog/2019/1/31/convolutional-neural-networks-a-quick-guide-for-newbies)
+
 ### Random notes
 
 Softmax. How to prevent overflow when dealing with big numbershttps://nolanbconaway.github.io/blog/2017/softmax-numpy.html
