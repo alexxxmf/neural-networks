@@ -114,6 +114,8 @@ For tricky derivatives/gradients like the softmax one, I rely on given python im
 
 - [More on Hubel and Wiesel experiment and how it relates to CNN studies](https://www.esantus.com/blog/2019/1/31/convolutional-neural-networks-a-quick-guide-for-newbies)
 
+- [Guide to receptive field arithmetic for Convolutional Neural Network](https://blog.mlreview.com/a-guide-to-receptive-field-arithmetic-for-convolutional-neural-networks-e0f514068807)
+
 ### Random notes
 
 Softmax. How to prevent overflow when dealing with big numbershttps://nolanbconaway.github.io/blog/2017/softmax-numpy.html
