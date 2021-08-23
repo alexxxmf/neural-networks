@@ -116,6 +116,10 @@ For tricky derivatives/gradients like the softmax one, I rely on given python im
 
 - [Guide to receptive field arithmetic for Convolutional Neural Network](https://blog.mlreview.com/a-guide-to-receptive-field-arithmetic-for-convolutional-neural-networks-e0f514068807)
 
+- [Making Pixel Art with GAN arhcitectures](https://inikolaeva.medium.com/make-pixel-art-in-seconds-with-machine-learning-e1b1974ba572)
+
+- [Neuroevolution and how to train digital squids how to swim](https://jobtalle.com/neuroevolution_in_squids.html?utm_campaign=Dynamically%20Typed&utm_medium=email&utm_source=Revue%20newsletter)
+
 ### Random notes
 
 Softmax. How to prevent overflow when dealing with big numbershttps://nolanbconaway.github.io/blog/2017/softmax-numpy.html
