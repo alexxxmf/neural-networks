@@ -120,6 +120,10 @@ For tricky derivatives/gradients like the softmax one, I rely on given python im
 
 - [Neuroevolution and how to train digital squids how to swim](https://jobtalle.com/neuroevolution_in_squids.html?utm_campaign=Dynamically%20Typed&utm_medium=email&utm_source=Revue%20newsletter)
 
+- [Deep Unsupervised pixelization repo](https://github.com/csqiangwen/Deep-Unsupervised-Pixelization)
+
+- [Deep Unsupervised pixelization repo Paper](https://www.cse.cuhk.edu.hk/~ttwong/papers/pixel/pixel.html)
+
 ### Random notes
 
 Softmax. How to prevent overflow when dealing with big numbershttps://nolanbconaway.github.io/blog/2017/softmax-numpy.html
