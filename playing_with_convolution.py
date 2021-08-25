@@ -20,4 +20,8 @@ plt.imshow(r_fh, cmap='gray')
 
 # Here we combine bode edge detection results
 r_comb = np.sqrt(np.square(r_fv) + np.square(r_fh))
+# SOme normalization
+r_comb *= 255.0 / r_comb.max()
 plt.imshow(r_comb, cmap='gray')
+
+edge_orientation_matrix = np.arctan(r_fv/r_fh)
