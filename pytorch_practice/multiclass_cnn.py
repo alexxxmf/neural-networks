@@ -12,7 +12,7 @@ import torchvision.transforms as transforms
 import cv2
 from sklearn.metrics import confusion_matrix
 import itertools
-import datetime
+from datetime import datetime
 
 train_dataset = torchvision.datasets.FashionMNIST(
     root='./datasets',
@@ -49,7 +49,9 @@ class CNN(nn.Module):
       nn.Dropout(0.2),
       # Here is a way to calculate the output of the last conv layer so we can plug it here
       # https://stackoverflow.com/questions/34739151/calculate-dimension-of-feature-maps-in-convolutional-neural-network
-      nn.Linear(128 * 2 * 2, 512),
+      # output dimension for a conv layer is equal to ((n + 2p -f)/s) + 1. If it's decimal we lower it
+      # output from last conv layer is a set of 128 feature maps, having each a 2 x 2 dimension
+      nn.Linear(2 * 2 * 128, 512),
       nn.ReLU(),
       nn.Dropout(0.2),
       nn.Linear(512, K),
