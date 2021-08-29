@@ -62,6 +62,69 @@ class CNN(nn.Module):
     flattened_output = output.view(output.size(0), -1)
     return self.dense_layers(flattened_output)
 
+class AlexNet(nn.Module):
+  def __init__(self, K):
+    super(LeNet5, self).__init__()
+    self.conv_layers = nn.Sequential(
+      nn.Conv2d(3, 64, kernel_size=11, stride=4, padding=2),
+      nn.ReLU(inplace=True),
+      nn.MaxPool2d(kernel_size=3, stride=2),
+      nn.Conv2d(64, 192, kernel_size=5, padding=2),
+      nn.ReLU(inplace=True),
+      nn.MaxPool2d(kernel_size=3, stride=2),
+      nn.Conv2d(192, 384, kernel_size=3, padding=1),
+      nn.ReLU(inplace=True),
+      nn.Conv2d(384, 256, kernel_size=3, padding=1),
+      nn.ReLU(inplace=True),
+      nn.Conv2d(256, 256, kernel_size=3, padding=1),
+      nn.ReLU(inplace=True),
+    )
+
+    self.dense_layers = nn.Sequential(
+        nn.Dropout(),
+        nn.Linear(256 * 6 * 6, 4096),
+        nn.ReLU(inplace=True),
+        nn.Dropout(),
+        nn.Linear(4096, 4096),
+        nn.ReLU(inplace=True),
+        nn.Linear(4096, K),
+    )
+  
+  def forward(self, X):
+    output = self.conv_layers(X)
+    flattened_output = torch.flatten(output, 1)
+    return self.dense_layers(flattened_output)
+
+class LeNet5(nn.Module):
+  def __init__(self, K):
+    super(LeNet5, self).__init__()
+    self.conv_layers = nn.Sequential(
+      nn.Conv2d(in_channels=1, out_channels=6, kernel_size=5, stride=1),
+      # 24 x 24 x 6
+      nn.Tanh(),
+      nn.AvgPool2d(kernel_size=2),
+      # 12 x 12 x 6
+      nn.Conv2d(in_channels=6, out_channels=16, kernel_size=5, stride=1),
+      # 8 x 8 x 16
+      nn.Tanh(),
+      nn.AvgPool2d(kernel_size=2),
+      # 4 x 4 x 16
+      nn.Conv2d(in_channels=16, out_channels=120, kernel_size=3, stride=1),
+      # 2 x 2 x 120
+      nn.Tanh()
+    )
+
+    self.dense_layers = nn.Sequential(
+      nn.Linear(2 * 2 * 120, 84),
+      nn.Tanh(),
+      nn.Linear(84, K)
+    )
+
+  def forward(self, X):
+    output = self.conv_layers(X)
+    flattened_output = torch.flatten(output, 1)
+    return self.dense_layers(flattened_output)
+
 
 model = CNN(K)
 
