@@ -124,6 +124,10 @@ For tricky derivatives/gradients like the softmax one, I rely on given python im
 
 - [Deep Unsupervised pixelization repo Paper](https://www.cse.cuhk.edu.hk/~ttwong/papers/pixel/pixel.html)
 
+- [Inception Layer](https://www.youtube.com/watch?v=jikAvn68mYY)
+
+- [Some stackoverflow comments on inception layers](https://datascience.stackexchange.com/questions/14984/what-is-an-inception-layer)
+
 ### Random notes
 
 Softmax. How to prevent overflow when dealing with big numbershttps://nolanbconaway.github.io/blog/2017/softmax-numpy.html
