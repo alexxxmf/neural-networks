@@ -39,7 +39,7 @@ def genBlock(input, output):
   )
 
 class Generator(nn.Module):
-  
+
   def __init__(self, z_dim=64, input_dim=784, hidden_dim=128):
     super().__init__()
     self.gen = nn.Sequential(
@@ -50,3 +50,9 @@ class Generator(nn.Module):
         nn.Linear(hidden_dim*8, input_dim), # in 1024, out 784 (28x28)
         nn.Sigmoid()
     )
+
+  def forward(self, noise):
+    return self.gen(noise)
+
+def gen_noise(number, z_dim):
+  return torch.randn(number, z_dim).to(device)
