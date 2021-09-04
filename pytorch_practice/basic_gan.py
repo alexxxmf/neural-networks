@@ -31,6 +31,9 @@ dataloader = DataLoader(MNIST('.', download=True, transform=transforms.ToTensor(
 
 # no steps 60000 images / 128 ~ 468
 
+noise_image_example = torch.randn(256, 256)
+plt.imshow(noise_image_example, cmap='gray')
+
 def genBlock(input, output):
   return nn.Sequential(
     nn.Linear(input, output),
