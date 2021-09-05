@@ -67,3 +67,15 @@ def discriminator_block(input, output):
     nn.LeakyReLU(0.2)
   )
 
+class Discriminator(nn.Module):
+  def __init__(self, input_dim=784, hidden_dim=256):
+    super().__init__()
+    self.discriminator = nn.Sequential(
+      discriminator_block(input_dim, hidden_dim * 4), # in 784, out 1024
+      discriminator_block(hidden_dim * 4, hidden_dim * 2), # in 1024, out 512
+      discriminator_block(hidden_dim * 2, hidden_dim), # in 512, out 256
+      nn.Linear(hidden_dim, 1) # in 256, out 1
+    )
+
+  def forward(self, image):
+    return  self.discriminator(image)
