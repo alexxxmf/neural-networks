@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 
 def show(tensor, channels=1, size=(28,28), num=16):
   data = tensor.detach().cpu().view(-1, channels, *size)
-  grid = make_grid(data[:num], n_rows=4).permute(1,2,0)
+  grid = make_grid(data[:num], nrow=4).permute(1,2,0)
   plt.imshow(grid)
   plt.show()
 
