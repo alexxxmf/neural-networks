@@ -34,7 +34,7 @@ dataloader = DataLoader(MNIST('.', download=True, transform=transforms.ToTensor(
 noise_image_example = torch.randn(256, 256)
 plt.imshow(noise_image_example, cmap='gray')
 
-def genBlock(input, output):
+def generator_block(input, output):
   return nn.Sequential(
     nn.Linear(input, output),
     nn.BatchNorm1d(output),
@@ -46,10 +46,10 @@ class Generator(nn.Module):
   def __init__(self, z_dim=64, input_dim=784, hidden_dim=128):
     super().__init__()
     self.gen = nn.Sequential(
-        genBlock(z_dim, hidden_dim), # in 64, out 128
-        genBlock(hidden_dim, hidden_dim*2), # in 128, out 256
-        genBlock(hidden_dim*2, hidden_dim*4), # in 256, out 512
-        genBlock(hidden_dim*4, hidden_dim*8), # in 512, out 1024
+        generator_block(z_dim, hidden_dim), # in 64, out 128
+        generator_block(hidden_dim, hidden_dim*2), # in 128, out 256
+        generator_block(hidden_dim*2, hidden_dim*4), # in 256, out 512
+        generator_block(hidden_dim*4, hidden_dim*8), # in 512, out 1024
         nn.Linear(hidden_dim*8, input_dim), # in 1024, out 784 (28x28)
         nn.Sigmoid()
     )
@@ -59,3 +59,11 @@ class Generator(nn.Module):
 
 def gen_noise(number, z_dim):
   return torch.randn(number, z_dim).to(device)
+
+
+def discriminator_block(input, output):
+  return nn.Sequential(
+    nn.Linear(input, output),
+    nn.LeakyReLU(0.2)
+  )
+
