@@ -79,3 +79,18 @@ class Discriminator(nn.Module):
 
   def forward(self, image):
     return  self.discriminator(image)
+
+
+generator = Generator(z_dim).to(device)
+generator_opt = torch.optim.Adam(generator.parameters(), lr=learning_rate)
+discriminator = Discriminator(z_dim).to(device)
+discriminator_opt = torch.optim.Adam(discriminator.parameters(), lr=learning_rate)
+
+
+x,y = next(iter(dataloader))
+print(x.shape, y.shape)
+print(y[:10])
+
+noise = gen_noise(batch_size, z_dim)
+fake = generator(noise)
+show(fake)
