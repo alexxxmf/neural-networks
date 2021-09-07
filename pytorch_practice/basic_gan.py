@@ -94,3 +94,28 @@ print(y[:10])
 noise = gen_noise(batch_size, z_dim)
 fake = generator(noise)
 show(fake)
+
+
+def calc_generator_loss(loss_func, generator, discriminator, number, z_dim):
+  noise = gen_noise(number, z_dim)
+  fake = generator(noise)
+  predictions = discriminator(fake)
+  targets = torch.ones_like(predictions)
+  generator_loss = loss_func(predictions, targets)
+
+  return generator_loss
+
+def calc_discriminator_loss(loss_func, generator, discriminator, number, real, z_dim):
+  noise = gen_noise(number, z_dim)
+  fake = generator(noise)
+  discriminator_fake = discriminator(fake.detach())
+  discriminator_fake_targets = torch.zeros_like(discriminator_fake)
+  discriminator_fake_loss = loss_func(discriminator_fake, discriminator_fake_targets)
+
+  discriminator_real = discriminator(real)
+  discriminator_real_targets = torch.ones_like(discriminator_real)
+  discriminator_real_loss = loss_func(discriminator_real, discriminator_real_targets)
+
+  discriminator_loss = (discriminator_fake_loss + discriminator_real_loss)/2
+
+  return discriminator_loss
