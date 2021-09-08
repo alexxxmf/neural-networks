@@ -125,17 +125,32 @@ def calc_discriminator_loss(loss_func, generator, discriminator, number, real, z
 for epoch in range(epochs):
   # we don t need the labels hence the underscoe _
   for real, _ in tqdm(dataloader):
-      # discriminator
-      discriminator_opt.zero_grad()
+    # discriminator
+    discriminator_opt.zero_grad()
 
-      current_batch_size = len(real) # 128 x 1 x 28 x 28
-      real = real.view(current_batch_size, -1) # 128 x 784
-      real = real.to(device)
+    current_batch_size = len(real) # 128 x 1 x 28 x 28
+    real = real.view(current_batch_size, -1) # 128 x 784
+    real = real.to(device)
 
-      discriminator_loss = calc_discriminator_loss(
-          loss_func, generator, discriminator, current_batch_size, real, z_dim)
+    discriminator_loss = calc_discriminator_loss(
+        loss_func, generator, discriminator, current_batch_size, real, z_dim)
 
-      discriminator_loss.backward(retain_graph=True)
-      discriminator_opt.step()
+    discriminator_loss.backward(retain_graph=True)
+    discriminator_opt.step()
 
       # generator
+    generator_opt.zero_grad()
+    generator_loss = calc_generator_loss(loss_func, generator, discriminator, current_batch_size, z_dim)
+    generator_loss.backward(retain_graph=True)
+
+    mean_discriminator_loss += discriminator_loss.item()/print_every
+    mean_generator_loss += discriminator_loss.item()/print_every
+
+    if (current_step % print_every and current_step > 0):
+      fake_noise = gen_noise(current_batch_size, z_dim)
+      fake = generator(fake_noise)
+      show(fake)
+      show(real)
+      print(f'{epoch}: step {current_step} / Generator loss: {mean_generator_loss} / discriminator loss: {mean_discriminator_loss}')
+
+    current_step+=1
