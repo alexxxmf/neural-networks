@@ -119,3 +119,23 @@ def calc_discriminator_loss(loss_func, generator, discriminator, number, real, z
   discriminator_loss = (discriminator_fake_loss + discriminator_real_loss)/2
 
   return discriminator_loss
+
+# 469 steps to process 128 images (except the last one)
+
+for epoch in range(epochs):
+  # we don t need the labels hence the underscoe _
+  for real, _ in tqdm(dataloader):
+      # discriminator
+      discriminator_opt.zero_grad()
+
+      current_batch_size = len(real) # 128 x 1 x 28 x 28
+      real = real.view(current_batch_size, -1) # 128 x 784
+      real = real.to(device)
+
+      discriminator_loss = calc_discriminator_loss(
+          loss_func, generator, discriminator, current_batch_size, real, z_dim)
+
+      discriminator_loss.backward(retain_graph=True)
+      discriminator_opt.step()
+
+      # generator
