@@ -146,7 +146,7 @@ for epoch in range(epochs):
     mean_discriminator_loss += discriminator_loss.item()/print_every
     mean_generator_loss += discriminator_loss.item()/print_every
 
-    if (current_step % print_every and current_step > 0):
+    if (current_step % print_every == 0 and current_step > 0):
       fake_noise = gen_noise(current_batch_size, z_dim)
       fake = generator(fake_noise)
       show(fake)
