@@ -142,6 +142,7 @@ for epoch in range(epochs):
     generator_opt.zero_grad()
     generator_loss = calc_generator_loss(loss_func, generator, discriminator, current_batch_size, z_dim)
     generator_loss.backward(retain_graph=True)
+    generator_opt.step()
 
     mean_discriminator_loss += discriminator_loss.item()/print_every
     mean_generator_loss += discriminator_loss.item()/print_every
