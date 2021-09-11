@@ -128,6 +128,8 @@ For tricky derivatives/gradients like the softmax one, I rely on given python im
 
 - [Some stackoverflow comments on inception layers](https://datascience.stackexchange.com/questions/14984/what-is-an-inception-layer)
 
+- [Interesting blog post regarding GANs with some references to interesting papers](https://machinelearningmastery.com/what-are-generative-adversarial-networks-gans/)
+
 ### Random notes
 
 Softmax. How to prevent overflow when dealing with big numbershttps://nolanbconaway.github.io/blog/2017/softmax-numpy.html
