@@ -83,7 +83,7 @@ class Discriminator(nn.Module):
 
 generator = Generator(z_dim).to(device)
 generator_opt = torch.optim.Adam(generator.parameters(), lr=learning_rate)
-discriminator = Discriminator(z_dim).to(device)
+discriminator = Discriminator().to(device)
 discriminator_opt = torch.optim.Adam(discriminator.parameters(), lr=learning_rate)
 
 
