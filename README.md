@@ -134,6 +134,8 @@ For tricky derivatives/gradients like the softmax one, I rely on given python im
 
 - [On how autograd and more in general, Pytorch, works behind the scenes](https://blog.paperspace.com/pytorch-101-understanding-graphs-and-automatic-differentiation/)
 
+- [Great introduction for VAEs and GAns](https://www.youtube.com/watch?v=yFBFl1cLYx8)
+
 ### Random notes
 
 Softmax. How to prevent overflow when dealing with big numbershttps://nolanbconaway.github.io/blog/2017/softmax-numpy.html
