@@ -136,6 +136,8 @@ For tricky derivatives/gradients like the softmax one, I rely on given python im
 
 - [Great introduction for VAEs and GAns](https://www.youtube.com/watch?v=yFBFl1cLYx8)
 
+- [Question in mathoverflow with some really good answers linking to some key papers with math-focus explanations](https://mathoverflow.net/questions/377744/mathematics-of-gans-generative-adversarial-networks)
+
 ### Random notes
 
 Softmax. How to prevent overflow when dealing with big numbershttps://nolanbconaway.github.io/blog/2017/softmax-numpy.html
